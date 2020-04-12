@@ -2,7 +2,7 @@
 ------------
 Reimplementation of [Striving for Simplicity and Performance in Off-Policy DRL: Output Normalization and Non-Uniform Sampling](https://arxiv.org/abs/1910.02208) using the PyTorch Deep Learning Framework and PyTorch Agent Net (PTAN) Reinforcement Learning Toolkit. 
 The specific algorithm implemented in this repository is the following:
-<img src="./images/SOP+ERE.png" width="60%">
+<img src="./images/SOP+ERE.png">
 
 ### Requirements
 ------------
