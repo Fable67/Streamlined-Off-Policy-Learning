@@ -24,26 +24,26 @@ All Hyperparameters can be changed in the file train_sop.py.
 ### Hyperparameters
 ------------
 
-*   ENV_ID = "RoboschoolHalfCheetah-v1"       Name of the environment.
-*   GAMMA = 0.99                              Discount factor.
-*   BATCH_SIZE = 256                          Batch size for training.
-*   LR_ACTOR = 0.0003                         Learning rate of the Actor/policy.
-*   LR_CRITIC = 0.0003                        Learning rate of the Critics/Q-Networks.
-*   REPLAY_SIZE = 1000000                     Maximum size of the replay buffer.
-*   REPLAY_INITIAL = 10000                    Minimum size of the replay buffer to begin training.
-*   TAU = 0.005                               Target smoothing coefficient
-*   REWARD_STEPS = 1                          Number of rollouts for Q approximation.
-*   STEPS_PER_EPOCH = 5000                    Number of steps an epoch has.
-*   ETA_INIT = 0.995                          Initial eta for recent experience sampling.
-*   ETA_FINAL = 0.999                         Final eta for recent experience sampling.
-*   ETA_BASELINE_EPOCH = 100                  Minimum number of epochs to approximate baseline for improvement normalization with.
-*   ETA_AVG_SIZE = 20                         Number of epochs to average performance with.
-*   C_MIN = 5000                              Minimum number of recent samples.
-*   FIXED_SIGMA_VALUE = 0.29                  Sigma for additive-gaussian-noise in actors action selection.
-*   BETA = 1                                  Beta for regularization in action normalization process.
-*   MAX_ITERATIONS = 3000000                  Maximum number of iterations.
-*   HID_SIZE = 256                            Number of Neurons in Actors and Critics Hidden Layers.
-*   ACTF = nn.ReLU                            Activation function used in Actor Network.
+*   ENV_ID = "RoboschoolHalfCheetah-v1"       (Name of the environment.)
+*   GAMMA = 0.99                              (Discount factor.)
+*   BATCH_SIZE = 256                          (Batch size for training.)
+*   LR_ACTOR = 0.0003                         (Learning rate of the Actor/policy.)
+*   LR_CRITIC = 0.0003                        (Learning rate of the Critics/Q-Networks.)
+*   REPLAY_SIZE = 1000000                     (Maximum size of the replay buffer.)
+*   REPLAY_INITIAL = 10000                    (Minimum size of the replay buffer to begin training.)
+*   TAU = 0.005                               (Target smoothing coefficient.)
+*   REWARD_STEPS = 1                          (Number of rollouts for Q approximation.)
+*   STEPS_PER_EPOCH = 5000                    (Number of steps an epoch has.)
+*   ETA_INIT = 0.995                          (Initial eta for recent experience sampling.)
+*   ETA_FINAL = 0.999                         (Final eta for recent experience sampling.)
+*   ETA_BASELINE_EPOCH = 100                  (Minimum number of epochs to approximate baseline for improvement normalization with.)
+*   ETA_AVG_SIZE = 20                         (Number of epochs to average performance with.)
+*   C_MIN = 5000                              (Minimum number of recent samples.)
+*   FIXED_SIGMA_VALUE = 0.29                  (Sigma for additive-gaussian-noise in actors action selection.)
+*   BETA = 1                                  (Beta for regularization in action normalization process.)
+*   MAX_ITERATIONS = 3000000                  (Maximum number of iterations.)
+*   HID_SIZE = 256                            (Number of Neurons in Actors and Critics Hidden Layers.)
+*   ACTF = nn.ReLU                            (Activation function used in Actor Network.)
 
 
 ### Mentions
