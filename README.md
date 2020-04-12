@@ -48,4 +48,5 @@ All Hyperparameters can be changed in the file train_sop.py.
 
 ### Mentions
 ------------
-This implementation is adapted from [Shmumas](https://github.com/Shmuma) [SAC implementation using PTAN](https://github.com/PacktPublishing/Deep-Reinforcement-Learning-Hands-On-Second-Edition/blob/sac-experiment/Chapter19/06_train_sac.py). It is also influenzed by the [official implementation](https://github.com/AutumnWu/Streamlined-Off-Policy-Learning).
+This implementation is adapted from [Shmumas](https://github.com/Shmuma) [SAC implementation using PTAN](https://github.com/PacktPublishing/Deep-Reinforcement-Learning-Hands-On-Second-Edition/blob/sac-experiment/Chapter19/06_train_sac.py). <br>
+It is also influenzed by the [official implementation](https://github.com/AutumnWu/Streamlined-Off-Policy-Learning).
