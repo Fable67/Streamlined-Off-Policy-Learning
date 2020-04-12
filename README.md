@@ -23,7 +23,7 @@ All Hyperparameters can be changed in the file train_sop.py.
 
 ### Hyperparameters
 ------------
-```
+
 ENV_ID = "RoboschoolHalfCheetah-v1"       Name of the environment.
 GAMMA = 0.99                              Discount factor.
 BATCH_SIZE = 256                          Batch size for training.
@@ -44,7 +44,7 @@ BETA = 1                                  Beta for regularization in action norm
 MAX_ITERATIONS = 3000000                  Maximum number of iterations.
 HID_SIZE = 256                            Number of Neurons in Actors and Critics Hidden Layers.
 ACTF = nn.ReLU                            Activation function used in Actor Network.
-```
+
 
 ### Mentions
 ------------
