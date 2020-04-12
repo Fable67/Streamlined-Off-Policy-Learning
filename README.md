@@ -1,10 +1,12 @@
 # Streamlined Off-Policy Learning
 
+
 ### Description
 ------------
-Implementation of [Striving for Simplicity and Performance in Off-Policy DRL: Output Normalization and Non-Uniform Sampling](https://arxiv.org/abs/1910.02208) using the PyTorch Deep Learning Framework and PyTorch Agent Net (PTAN) Reinforcement Learning Toolkit. 
+Implementation of [Striving for Simplicity and Performance in Off-Policy DRL: Output Normalization and Non-Uniform Sampling](https://arxiv.org/abs/1910.02208) using the PyTorch Deep Learning Framework and PyTorch Agent Net (PTAN) Reinforcement Learning Toolkit. <br>
 The specific algorithm implemented in this repository is the following:
-<img src="./images/SOP+ERE.png">
+<img src="./images/SOP+ERE.png">   
+
 
 ### Requirements
 ------------
@@ -13,12 +15,14 @@ The specific algorithm implemented in this repository is the following:
 *   [PyTorch](http://pytorch.org/)
 *   [PTAN](https://github.com/Shmuma/ptan)
 
+
 ### Usage
 ------------
 ```
 usage: train_sop.py [-h] [--cuda] [--name NAME] [--env ENV]
 ```
 All Hyperparameters can be changed in the file train_sop.py.
+
 
 
 ### Hyperparameters
@@ -44,6 +48,7 @@ All Hyperparameters can be changed in the file train_sop.py.
 *   MAX_ITERATIONS = 3000000                  (Maximum number of iterations.)
 *   HID_SIZE = 256                            (Number of Neurons in Actors and Critics Hidden Layers.)
 *   ACTF = nn.ReLU                            (Activation function used in Actor Network.)
+
 
 
 ### Mentions
