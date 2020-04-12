@@ -1,0 +1,10 @@
+*
+!/lib/
+!/lib/common.py
+!/lib/model.py
+!/images/
+!/images/SOP+ERE.png
+!/train_sop.py
+!/README.md
+!/LICENSE
+!/.gitignore
