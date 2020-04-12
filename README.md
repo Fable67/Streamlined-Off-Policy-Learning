@@ -1,12 +1,12 @@
 # Streamlined Off-Policy Learning
-
+<br/>
 
 ### Description
 ------------
 Implementation of [Striving for Simplicity and Performance in Off-Policy DRL: Output Normalization and Non-Uniform Sampling](https://arxiv.org/abs/1910.02208) using the PyTorch Deep Learning Framework and PyTorch Agent Net (PTAN) Reinforcement Learning Toolkit. <br>
 The specific algorithm implemented in this repository is the following:
 <img src="./images/SOP+ERE.png">   
-
+<br/>
 
 ### Requirements
 ------------
@@ -14,7 +14,7 @@ The specific algorithm implemented in this repository is the following:
 *   [TensorboardX](https://github.com/lanpa/tensorboardX)
 *   [PyTorch](http://pytorch.org/)
 *   [PTAN](https://github.com/Shmuma/ptan)
-
+<br/>
 
 ### Usage
 ------------
@@ -22,7 +22,7 @@ The specific algorithm implemented in this repository is the following:
 usage: train_sop.py [-h] [--cuda] [--name NAME] [--env ENV]
 ```
 All Hyperparameters can be changed in the file train_sop.py.
-
+<br/>
 
 
 ### Hyperparameters
@@ -53,5 +53,18 @@ All Hyperparameters can be changed in the file train_sop.py.
 
 ### Mentions
 ------------
-This implementation is adapted from [Shmumas](https://github.com/Shmuma) [SAC implementation using PTAN](https://github.com/PacktPublishing/Deep-Reinforcement-Learning-Hands-On-Second-Edition/blob/sac-experiment/Chapter19/06_train_sac.py). <br>
+This implementation is adapted from [Shmumas](https://github.com/Shmuma) [SAC implementation using PTAN](https://github.com/PacktPublishing/Deep-Reinforcement-Learning-Hands-On-Second-Edition/blob/sac-experiment/Chapter19/06_train_sac.py). <br/>
 It is also influenzed by the [official implementation](https://github.com/AutumnWu/Streamlined-Off-Policy-Learning).
+<br/>
+
+### Reference
+```shell
+@misc{wang2019striving,
+    title={Striving for Simplicity and Performance in Off-Policy DRL: Output Normalization and Non-Uniform Sampling},
+    author={Che Wang and Yanqiu Wu and Quan Vuong and Keith Ross},
+    year={2019},
+    eprint={1910.02208},
+    archivePrefix={arXiv},
+    primaryClass={cs.LG}
+}
+```
