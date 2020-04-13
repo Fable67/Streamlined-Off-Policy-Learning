@@ -179,8 +179,8 @@ if __name__ == "__main__":
                     grad_means += (p.grad ** 2).mean().sqrt().item()
                     grad_count += 1
 
-                tb_tracker.track("actor_grad_l2", grad_means / grad_count, step_idx)
-                tb_tracker.track("actor_grad_max", grad_max, step_idx)
+                tb_tracker.track("actor_grad_l2", grad_means / grad_count, frame_idx)
+                tb_tracker.track("actor_grad_max", grad_max, frame_idx)
                 tb_tracker.track("ref_vals", ref_vals / ep_len, frame_idx)
                 tb_tracker.track("q1_loss", q1_loss / ep_len, frame_idx)
                 tb_tracker.track("q2_loss", q2_loss / ep_len, frame_idx)
