@@ -80,8 +80,8 @@ class Agent(ptan.agent.BaseAgent):
         K_v = torch.tensor(mu_v.size()[1]).to(self.device)
         Gs_v = torch.sum(torch.abs(mu_v), dim=1).view(-1, 1)
         Gs_v = Gs_v / K_v
-        # TODO: Check if additional devision by beta improves performance
-        # Gs_v = Gs_v / self.beta
+        # TODO: Check if beta != 1 improves performance
+        Gs_v = Gs_v / self.beta
         ones_v = torch.ones(Gs_v.size()).to(self.device)
         Gs_mod1_v = torch.where(Gs_v >= 1, Gs_v, ones_v)
         mu_v = mu_v / Gs_mod1_v
