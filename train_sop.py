@@ -8,6 +8,7 @@ from tensorboardX import SummaryWriter
 import numpy as np
 
 from lib import model, common
+from lib.Hyperparameters import *
 
 import torch
 import torch.nn as nn
@@ -25,28 +26,6 @@ try:
     import pybullet_envs
 except:
     print("A problem occured when trying to import pybullet_envs. Maybe not installed?")
-
-
-ENV_ID = "RoboschoolHalfCheetah-v1"
-GAMMA = 0.99
-BATCH_SIZE = 256
-LR_ACTOR = 0.0003
-LR_CRITIC = 0.0003
-REPLAY_SIZE = 1000000
-REPLAY_INITIAL = 10000
-TAU = 0.005
-REWARD_STEPS = 1
-STEPS_PER_EPOCH = 5000
-ETA_INIT = 0.995
-ETA_FINAL = 0.999
-ETA_BASELINE_EPOCH = 100
-ETA_AVG_SIZE = 20
-C_MIN = 5000
-FIXED_SIGMA_VALUE = 0.29
-BETA = 1
-MAX_ITERATIONS = 3000000
-HID_SIZE = 256
-ACTF = nn.ReLU
 
 
 @torch.no_grad()
@@ -74,6 +53,8 @@ if __name__ == "__main__":
     parser.add_argument("-n", "--name", required=True, help="Name of the run")
     parser.add_argument("-e", "--env", default=ENV_ID,
                         help="Environment id, default=" + ENV_ID)
+    parser.add_argument("-i", "--iterations", type=int, default=MAX_ITERATIONS,
+                        help="Maximum number of iterations, default=" + str(MAX_ITERATIONS))
     args = parser.parse_args()
     device = torch.device("cuda" if args.cuda else "cpu")
 
@@ -210,5 +191,5 @@ if __name__ == "__main__":
                             torch.save(act_net.state_dict(), fname)
                         best_reward = rewards
 
-                if frame_idx > MAX_ITERATIONS:
+                if frame_idx > args.iterations:
                     break

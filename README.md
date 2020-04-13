@@ -19,9 +19,9 @@ The specific algorithm implemented in this repository is the following:
 ### Usage
 ------------
 ```
-usage: train_sop.py [-h] [--cuda] [--name NAME] [--env ENV]
+usage: train_sop.py [-h] [--cuda] [--name NAME] [--env ENV] [--iterations ITERATIONS]
 ```
-All Hyperparameters can be changed in the file train_sop.py.
+All Hyperparameters can be changed in the file /lib/Hyperparameters.py.
 <br/>
 
 
