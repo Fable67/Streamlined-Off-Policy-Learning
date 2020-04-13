@@ -104,3 +104,12 @@ class Agent(ptan.agent.BaseAgent):
     def __call__(self, states, agent_states):
         actions = self.get_actions(states).data.cpu().numpy()
         return actions, agent_states
+
+
+class RandomAgent(ptan.agent.BaseAgent):
+    def __init__(self, act_size):
+        self.act_size = act_size
+
+    def __call__(self, states, agent_states):
+        actions = np.random.rand(np.shape(states)[0], self.act_size) * 2 - 1
+        return actions, agent_states

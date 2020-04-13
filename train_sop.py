@@ -77,6 +77,9 @@ if __name__ == "__main__":
 
     writer = SummaryWriter(comment="-sop_" + args.name)
     agent = model.Agent(act_net, FIXED_SIGMA_VALUE, BETA, device=device)
+    rnd_agent = model.RandomAgent(env.action_space.shape[0])
+    init_exp_source = iter(ptan.experience.ExperienceSourceFirstLast(
+        env, rnd_agent, gamma=GAMMA, steps_count=REWARD_STEPS))
     exp_source = ptan.experience.ExperienceSourceFirstLast(
         env, agent, gamma=GAMMA, steps_count=REWARD_STEPS)
     buffer = common.EmphasizingExperienceReplay(
@@ -96,7 +99,11 @@ if __name__ == "__main__":
             while True:
                 rewards_steps = []
                 while len(rewards_steps) == 0:
-                    buffer.populate(1)
+                    if len(buffer) < REPLAY_INITIAL:
+                        entry = next(init_exp_source)
+                        buffer._add(entry)
+                    else:
+                        buffer.populate(1)
                     rewards_steps = exp_source.pop_rewards_steps()
                 rewards, steps = zip(*rewards_steps)
                 ep_ret = rewards[0]
@@ -164,6 +171,16 @@ if __name__ == "__main__":
 
                     tgt_twinq_net.alpha_sync(alpha=1. - TAU)
 
+                grad_max = 0
+                grad_means = 0
+                grad_count = 0
+                for p in act_net.parameters():
+                    grad_max = max(grad_max, p.grad.abs().max().item())
+                    grad_means += (p.grad ** 2).mean().sqrt().item()
+                    grad_count += 1
+
+                tb_tracker.track("actor_grad_l2", grad_means / grad_count, step_idx)
+                tb_tracker.track("actor_grad_max", grad_max, step_idx)
                 tb_tracker.track("ref_vals", ref_vals / ep_len, frame_idx)
                 tb_tracker.track("q1_loss", q1_loss / ep_len, frame_idx)
                 tb_tracker.track("q2_loss", q2_loss / ep_len, frame_idx)
