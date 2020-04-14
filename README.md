@@ -1,14 +1,14 @@
 # Streamlined Off-Policy Learning
 <br/>
 
-### Description
+## Description
 ------------
 Implementation of [Striving for Simplicity and Performance in Off-Policy DRL: Output Normalization and Non-Uniform Sampling](https://arxiv.org/abs/1910.02208) using the PyTorch Deep Learning Framework and PyTorch Agent Net (PTAN) Reinforcement Learning Toolkit. <br>
 The specific algorithm implemented in this repository is the following:
 <img src="./images/SOP+ERE.png">   
 <br/>
 
-### Requirements
+## Requirements
 ------------
 *   [mujoco-py](https://github.com/openai/mujoco-py)
 *   [TensorboardX](https://github.com/lanpa/tensorboardX)
@@ -16,7 +16,7 @@ The specific algorithm implemented in this repository is the following:
 *   [PTAN](https://github.com/Shmuma/ptan)
 <br/>
 
-### Usage
+## Usage
 ------------
 ```
 train_sop.py [-h] [--cuda] [--name NAME] [--env ENV] [--iterations ITERATIONS]
@@ -27,7 +27,7 @@ All Hyperparameters can be changed in the file /lib/Hyperparameters.py.
 <br/>
 
 
-### Hyperparameters
+## Hyperparameters
 ------------
 
 *   ENV_ID = "RoboschoolHalfCheetah-v1"       (Name of the environment.)
@@ -53,13 +53,20 @@ All Hyperparameters can be changed in the file /lib/Hyperparameters.py.
 <br/>
 
 
-### Mentions
+## Results
+### Humanoid-v3
+<video src="./videos/Humanoid-v3.mp4">
+<br/>
+
+
+## Mentions
 ------------
 This implementation is adapted from [Shmumas](https://github.com/Shmuma) [SAC implementation using PTAN](https://github.com/PacktPublishing/Deep-Reinforcement-Learning-Hands-On-Second-Edition/blob/sac-experiment/Chapter19/06_train_sac.py). <br/>
 It is also influenzed by the [official implementation](https://github.com/AutumnWu/Streamlined-Off-Policy-Learning).
 <br/>
 
-### Reference
+
+## Reference
 ```shell
 @misc{wang2019striving,
     title={Striving for Simplicity and Performance in Off-Policy DRL: Output Normalization and Non-Uniform Sampling},

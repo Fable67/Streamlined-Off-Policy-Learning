@@ -8,6 +8,9 @@
 !/images/
 !/images/SOP+ERE.png
 
+!/videos/
+!/videos/Humanoid-v3.mp4
+
 !/train_sop.py
 !/play_sop.py
 
