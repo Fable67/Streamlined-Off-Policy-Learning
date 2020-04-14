@@ -55,7 +55,7 @@ All Hyperparameters can be changed in the file /lib/Hyperparameters.py.
 
 ## Results
 ### Humanoid-v3
-<video src="./videos/Humanoid-v3.mp4">
+<img src="./videos/Humanoid-v3.gif">
 <br/>
 
 
