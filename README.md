@@ -54,6 +54,10 @@ All Hyperparameters can be changed in the file /lib/Hyperparameters.py.
 
 
 ## Results
+### HalfCheetah-v3
+<img src="./videos/SOP-HalfCheetah-v3.gif">
+<br/>
+
 ### Humanoid-v3
 <img src="./videos/SOP-Humanoid-v3.gif">
 <br/>
