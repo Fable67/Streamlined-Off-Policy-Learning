@@ -19,7 +19,9 @@ The specific algorithm implemented in this repository is the following:
 ### Usage
 ------------
 ```
-usage: train_sop.py [-h] [--cuda] [--name NAME] [--env ENV] [--iterations ITERATIONS]
+train_sop.py [-h] [--cuda] [--name NAME] [--env ENV] [--iterations ITERATIONS]
+
+play_sop.py [-h] [--eval] [--model MODEL] [--env ENV] [--record RECORD]
 ```
 All Hyperparameters can be changed in the file /lib/Hyperparameters.py.
 <br/>
@@ -48,7 +50,7 @@ All Hyperparameters can be changed in the file /lib/Hyperparameters.py.
 *   MAX_ITERATIONS = 3000000                  (Maximum number of iterations.)
 *   HID_SIZE = 256                            (Number of Neurons in Actors and Critics Hidden Layers.)
 *   ACTF = nn.ReLU                            (Activation function used in Actor Network.)
-
+<br/>
 
 
 ### Mentions
