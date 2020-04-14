@@ -62,6 +62,10 @@ All Hyperparameters can be changed in the file /lib/Hyperparameters.py.
 <img src="./videos/SOP-Humanoid-v3.gif">
 <br/>
 
+### LunarLanderContinuous-v2
+<img src="./videos/SOP-LunarLanderContinuous-v2.gif">
+<br/>
+
 
 ## Mentions
 ------------

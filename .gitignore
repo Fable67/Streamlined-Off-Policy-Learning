@@ -11,6 +11,7 @@
 !/videos/
 !/videos/SOP-HalfCheetah-v3.gif
 !/videos/SOP-Humanoid-v3.gif
+!/videos/SOP-LunarLanderContinuous-v2.gif
 
 !/train_sop.py
 !/play_sop.py
