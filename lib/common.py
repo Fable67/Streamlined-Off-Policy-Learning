@@ -29,9 +29,9 @@ def unpack_batch(batch, tgt_twinq_net, agent, last_val_gamma: float, device="cpu
         last_states_v = ptan.agent.float32_preprocessor(last_states).to(device)
         last_acts_v = agent.get_actions(last_states)
         last_q_v = torch.min(*tgt_twinq_net(last_states_v, last_acts_v))
-        last_vals = last_q_v.squeeze().data.cpu().numpy()
+        last_q = last_q_v.squeeze().data.cpu().numpy()
 
-        rewards[not_done_idx] += last_val_gamma * last_vals
+        rewards[not_done_idx] += last_val_gamma * last_q
 
     ref_vals_v = torch.FloatTensor(rewards).to(device)
     return states_v, actions_v, ref_vals_v
