@@ -33,8 +33,8 @@ def unpack_batch(batch, tgt_twinq_net, agent, last_val_gamma: float, device="cpu
 
         rewards[not_done_idx] += last_val_gamma * last_q
 
-    ref_vals_v = torch.FloatTensor(rewards).to(device)
-    return states_v, actions_v, ref_vals_v
+    ref_q_v = torch.FloatTensor(rewards).to(device)
+    return states_v, actions_v, ref_q_v
 
 
 class EmphasizingExperienceReplay:

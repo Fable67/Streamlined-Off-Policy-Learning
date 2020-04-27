@@ -117,7 +117,7 @@ if __name__ == "__main__":
                 if len(buffer) < REPLAY_INITIAL:
                     continue
 
-                ref_vals = 0
+                ref_q = 0
                 q1_loss = 0
                 q2_loss = 0
                 q = 0
@@ -132,18 +132,18 @@ if __name__ == "__main__":
                         c_k = C_MIN
 
                     batch = buffer.sample(c_k, BATCH_SIZE)
-                    states_v, actions_v, ref_vals_v = \
+                    states_v, actions_v, ref_q_v = \
                         common.unpack_batch(batch, tgt_twinq_net.target_model,
                                             agent, GAMMA ** REWARD_STEPS, device)
 
                     with torch.no_grad():
-                        ref_vals += ref_vals_v.mean()
+                        ref_q += ref_q_v.mean()
 
                     # TODO: Check if seperate optimizers for the q functions improve performance
                     # TwinQ
                     q1_v, q2_v = twinq_net(states_v, actions_v)
-                    q1_loss_v = (q1_v.squeeze() - ref_vals_v.detach()).pow(2).mean()
-                    q2_loss_v = (q2_v.squeeze() - ref_vals_v.detach()).pow(2).mean()
+                    q1_loss_v = (q1_v.squeeze() - ref_q_v.detach()).pow(2).mean()
+                    q2_loss_v = (q2_v.squeeze() - ref_q_v.detach()).pow(2).mean()
                     with torch.no_grad():
                         q1_loss += q1_loss_v
                         q2_loss += q2_loss_v
@@ -181,7 +181,7 @@ if __name__ == "__main__":
 
                 tb_tracker.track("actor_grad_l2", grad_means / grad_count, frame_idx)
                 tb_tracker.track("actor_grad_max", grad_max, frame_idx)
-                tb_tracker.track("ref_vals", ref_vals / ep_len, frame_idx)
+                tb_tracker.track("ref_q", ref_q / ep_len, frame_idx)
                 tb_tracker.track("q1_loss", q1_loss / ep_len, frame_idx)
                 tb_tracker.track("q2_loss", q2_loss / ep_len, frame_idx)
                 tb_tracker.track("q", q / ep_len, frame_idx)
