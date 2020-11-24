@@ -7,7 +7,6 @@ import ptan
 
 @torch.no_grad()
 def unpack_batch(batch, tgt_twinq_net, agent, last_val_gamma: float, device="cpu"):
-
     states = []
     actions = []
     rewards = []
@@ -60,8 +59,6 @@ class EmphasizingExperienceReplay:
         """
         Get one random batch from experience replay
         TODO: implement sampling order policy
-        :param batch_size:
-        :return:
         """
         if len(self.buffer) <= batch_size:
             return self.buffer

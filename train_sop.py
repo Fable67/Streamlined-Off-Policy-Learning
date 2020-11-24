@@ -139,7 +139,6 @@ if __name__ == "__main__":
                     with torch.no_grad():
                         ref_q += ref_q_v.mean()
 
-                    # TODO: Check if seperate optimizers for the q functions improve performance
                     # TwinQ
                     q1_v, q2_v = twinq_net(states_v, actions_v)
                     q1_loss_v = (q1_v.squeeze() - ref_q_v.detach()).pow(2).mean()
