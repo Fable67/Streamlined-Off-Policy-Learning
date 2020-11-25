@@ -1,4 +1,5 @@
 import torch.nn as nn
+from lib import common
 
 ENV_ID = "RoboschoolHalfCheetah-v1"
 GAMMA = 0.99
@@ -16,7 +17,11 @@ ETA_BASELINE_EPOCH = 100
 ETA_AVG_SIZE = 20
 C_MIN = 5000
 FIXED_SIGMA_VALUE = 0.3
-BETA = 1
+BETA_AGENT = 1
 MAX_ITERATIONS = 1000000
 HID_SIZE = 256
 ACTF = nn.ReLU
+OPTIMIZER = common.EmphasizingExperienceReplay
+BETA_START = 0.5
+BETA_END_ITER = 10000
+ALPHA_PROB = 0.7

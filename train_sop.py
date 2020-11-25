@@ -76,14 +76,14 @@ if __name__ == "__main__":
     tgt_twinq_net = ptan.agent.TargetNet(twinq_net)
 
     writer = SummaryWriter(comment="-sop_" + args.name)
-    agent = model.Agent(act_net, FIXED_SIGMA_VALUE, BETA, device=device)
+    agent = model.Agent(act_net, FIXED_SIGMA_VALUE, BETA_AGENT, device=device)
     rnd_agent = model.RandomAgent(env.action_space.shape[0])
     init_exp_source = iter(ptan.experience.ExperienceSourceFirstLast(
         env, rnd_agent, gamma=GAMMA, steps_count=REWARD_STEPS))
     exp_source = ptan.experience.ExperienceSourceFirstLast(
         env, agent, gamma=GAMMA, steps_count=REWARD_STEPS)
-    buffer = common.EmphasizingExperienceReplay(
-        exp_source, buffer_size=REPLAY_SIZE)
+    buffer = OPTIMIZER(
+        exp_source, buffer_size=REPLAY_SIZE, prob_alpha=ALPHA_PROB)
     act_opt = optim.Adam(act_net.parameters(), lr=LR_ACTOR)
     q1_opt = optim.Adam(twinq_net.q1.parameters(), lr=LR_CRITIC)
     q2_opt = optim.Adam(twinq_net.q2.parameters(), lr=LR_CRITIC)
@@ -93,15 +93,17 @@ if __name__ == "__main__":
     recent_total_episode_return = 0
     recent_n_episodes = 0
     best_reward = None
+    withPrio = isinstance(buffer, common.EmphasizingPrioritizingExperienceReplay)
     with ptan.common.utils.RewardTracker(writer) as tracker:
         with ptan.common.utils.TBMeanTracker(
                 writer, batch_size=10) as tb_tracker:
             while True:
+                if withPrio:
+                    beta = min(1.0, BETA_START + frame_idx * (1.0 - BETA_START) / BETA_END_ITER)
                 rewards_steps = []
                 while len(rewards_steps) == 0:
                     if len(buffer) < REPLAY_INITIAL:
-                        entry = next(init_exp_source)
-                        buffer._add(entry)
+                        buffer.populate(1, init_exp_source)
                     else:
                         buffer.populate(1)
                     rewards_steps = exp_source.pop_rewards_steps()
@@ -131,7 +133,12 @@ if __name__ == "__main__":
                     if c_k < C_MIN:
                         c_k = C_MIN
 
-                    batch = buffer.sample(c_k, BATCH_SIZE)
+                    if withPrio:
+                        batch, batch_indices, batch_weights = buffer.sample(c_k, BATCH_SIZE, beta)
+                        batch_weights_v = torch.from_numpy(batch_weights).to(device)
+                    else:
+                        batch = buffer.sample(c_k, BATCH_SIZE)
+                        batch_weights_v = torch.from_numpy(np.array(1, dtype=np.float32)).to(device)
                     states_v, actions_v, ref_q_v = \
                         common.unpack_batch(batch, tgt_twinq_net.target_model,
                                             agent, GAMMA ** REWARD_STEPS, device)
@@ -141,8 +148,12 @@ if __name__ == "__main__":
 
                     # TwinQ
                     q1_v, q2_v = twinq_net(states_v, actions_v)
-                    q1_loss_v = (q1_v.squeeze() - ref_q_v.detach()).pow(2).mean()
-                    q2_loss_v = (q2_v.squeeze() - ref_q_v.detach()).pow(2).mean()
+                    q1_loss_v = batch_weights_v * (q1_v.squeeze() - ref_q_v.detach()).pow(2)
+                    q2_loss_v = batch_weights_v * (q2_v.squeeze() - ref_q_v.detach()).pow(2)
+                    if withPrio:
+                        sample_prios_v = 0.5 * (q1_loss_v + q2_loss_v) + 1e-5
+                    q1_loss_v = q1_loss_v.mean()
+                    q2_loss_v = q2_loss_v.mean()
                     with torch.no_grad():
                         q1_loss += q1_loss_v
                         q2_loss += q2_loss_v
@@ -167,6 +178,9 @@ if __name__ == "__main__":
                     act_opt.zero_grad()
                     act_loss_v.backward()
                     act_opt.step()
+
+                    if withPrio:
+                        buffer.update_priorities(batch_indices, sample_prios_v.data.cpu().numpy())
 
                     tgt_twinq_net.alpha_sync(alpha=1. - TAU)
 
