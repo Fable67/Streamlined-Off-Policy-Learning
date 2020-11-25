@@ -82,8 +82,7 @@ if __name__ == "__main__":
         env, rnd_agent, gamma=GAMMA, steps_count=REWARD_STEPS))
     exp_source = ptan.experience.ExperienceSourceFirstLast(
         env, agent, gamma=GAMMA, steps_count=REWARD_STEPS)
-    buffer = OPTIMIZER(
-        exp_source, buffer_size=REPLAY_SIZE, prob_alpha=ALPHA_PROB)
+    buffer = BUFFER(exp_source, buffer_size=REPLAY_SIZE, prob_alpha=ALPHA_PROB)
     act_opt = optim.Adam(act_net.parameters(), lr=LR_ACTOR)
     q1_opt = optim.Adam(twinq_net.q1.parameters(), lr=LR_CRITIC)
     q2_opt = optim.Adam(twinq_net.q2.parameters(), lr=LR_CRITIC)
