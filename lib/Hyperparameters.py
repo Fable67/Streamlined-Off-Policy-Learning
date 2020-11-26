@@ -3,7 +3,7 @@ from lib import common
 
 ENV_ID = "RoboschoolHalfCheetah-v1"
 GAMMA = 0.99
-BATCH_SIZE = 256
+BATCH_SIZE = 512
 LR_ACTOR = 0.0003
 LR_CRITIC = 0.0003
 REPLAY_SIZE = 1000000
@@ -22,6 +22,6 @@ MAX_ITERATIONS = 1000000
 HID_SIZE = 256
 ACTF = nn.ReLU
 BUFFER = common.EmphasizingExperienceReplay
-BETA_START = 0.5
+BETA_START = 0.4
 BETA_END_ITER = 10000
-ALPHA_PROB = 0.7
+ALPHA_PROB = 0.6

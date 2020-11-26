@@ -60,6 +60,14 @@ class ModelTwinQ(nn.Module):
         x = torch.cat([obs, act], dim=1)
         return self.q1(x), self.q2(x)
 
+    def forwardQ1(self, obs, act):
+        x = torch.cat([obs, act], dim=1)
+        return self.q2(x)
+
+    def forwardQ2(self, obs, act):
+        x = torch.cat([obs, act], dim=1)
+        return self.q1(x)
+
 
 class Agent(ptan.agent.BaseAgent):
     def __init__(self, net, fixed_sigma_value, beta, device="cpu"):

@@ -159,7 +159,7 @@ if __name__ == "__main__":
 
                     # Actor
                     acts_v = agent.get_actions_deterministic(states_v)
-                    q_v = torch.min(*twinq_net(states_v, acts_v))
+                    q_v = twinq_net.forwardQ1(states_v, acts_v)
                     act_loss_v = (- q_v.squeeze()).mean()
 
                     with torch.no_grad():
