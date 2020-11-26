@@ -3,7 +3,7 @@ from lib import common
 
 ENV_ID = "RoboschoolHalfCheetah-v1"
 GAMMA = 0.99
-BATCH_SIZE = 512
+BATCH_SIZE = 256
 LR_ACTOR = 0.0003
 LR_CRITIC = 0.0003
 REPLAY_SIZE = 1000000
