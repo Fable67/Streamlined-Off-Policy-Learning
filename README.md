@@ -53,9 +53,10 @@ All Hyperparameters can be changed in the file /lib/Hyperparameters.py.
 *   HID_SIZE = 256                                       (Number of Neurons in Actors and Critics Hidden Layers.)
 *   ACTF = nn.ReLU                                       (Activation function used in Actor Network.)
 *   BUFFER = common.EmphasizingExperienceReplay          (Type of Replay Buffer used.)
-*   BETA_START = 0.5                                     (Starting value for beta for prioritized experience.)
+*   BETA_START = 0.4                                     (Starting value for beta for prioritized experience.)
 *   BETA_END_ITER = 10000                                (At which iteration beta for prioritized experience should be 1.)
-*   ALPHA_PROB = 0.7                                     (Exponent for probabilities in prioritized experience.)
+*   ALPHA_PROB = 0.6                                     (Exponent for probabilities in prioritized experience.)
+*	MUNCHAUSEN = False									 (Use Munchausen)
 <br/>
 
 

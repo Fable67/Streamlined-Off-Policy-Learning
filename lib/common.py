@@ -6,7 +6,7 @@ import ptan
 
 
 @torch.no_grad()
-def unpack_batch(batch, tgt_twinq_net, agent, last_val_gamma: float, device="cpu"):
+def unpack_batch(batch, tgt_twinq_net, agent, last_val_gamma: float, device="cpu", munchausen=False):
     states = []
     actions = []
     rewards = []
@@ -31,6 +31,11 @@ def unpack_batch(batch, tgt_twinq_net, agent, last_val_gamma: float, device="cpu
         last_q = last_q_v.squeeze().data.cpu().numpy()
 
         rewards[not_done_idx] += last_val_gamma * last_q
+        if munchausen:
+            m_alpha = 0.9 #TODO: Add as hyperparam
+            m_tau = 0.03   #TODO: Add as hyperparam
+            m_reward = m_alpha*np.clip(m_tau*agent.get_log_prob(states_v, actions_v), -1, 0)
+            rewards[not_done_idx] += m_reward
 
     ref_q_v = torch.FloatTensor(rewards).to(device)
     return states_v, actions_v, ref_q_v

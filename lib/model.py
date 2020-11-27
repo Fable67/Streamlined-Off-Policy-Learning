@@ -109,6 +109,22 @@ class Agent(ptan.agent.BaseAgent):
         actions = torch.tanh(mu_v)
         return actions
 
+    def get_log_prob(self, states_v, actions_v):
+        mu_v = self.net(states_v)
+        std_v = torch.zeros(mu_v.size()).to(self.device)
+        std_v += self.fixed_sigma_value
+        K_v = torch.tensor(mu_v.size()[1]).to(self.device)
+        Gs_v = torch.sum(torch.abs(mu_v), dim=1).view(-1, 1)
+        Gs_v = Gs_v / K_v
+        # TODO: Check if beta != 1 improves performance
+        Gs_v = Gs_v / self.beta
+        ones_v = torch.ones(Gs_v.size()).to(self.device)
+        Gs_mod1_v = torch.where(Gs_v >= 1, Gs_v, ones_v)
+        mu_v = mu_v / Gs_mod1_v
+        dist = Normal(mu_v, std_v)
+        log_prob_v = dist.log_prob(actions_v).mean()
+        return log_prob_v.cpu().numpy()
+
     def __call__(self, states, agent_states):
         actions = self.get_actions(states).data.cpu().numpy()
         return actions, agent_states

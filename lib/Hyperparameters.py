@@ -25,3 +25,4 @@ BUFFER = common.EmphasizingExperienceReplay
 BETA_START = 0.4
 BETA_END_ITER = 10000
 ALPHA_PROB = 0.6
+MUNCHAUSEN = False

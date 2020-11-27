@@ -140,7 +140,7 @@ if __name__ == "__main__":
                         batch_weights_v = torch.from_numpy(np.array(1, dtype=np.float32)).to(device)
                     states_v, actions_v, ref_q_v = \
                         common.unpack_batch(batch, tgt_twinq_net.target_model,
-                                            agent, GAMMA ** REWARD_STEPS, device)
+                                            agent, GAMMA ** REWARD_STEPS, device, munchausen=MUNCHAUSEN)
 
                     with torch.no_grad():
                         ref_q += ref_q_v.mean()
