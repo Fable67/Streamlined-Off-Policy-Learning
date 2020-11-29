@@ -32,9 +32,9 @@ def unpack_batch(batch, tgt_twinq_net, agent, last_val_gamma: float, device="cpu
 
         rewards[not_done_idx] += last_val_gamma * last_q
         if munchausen:
-            m_alpha = 0.9 #TODO: Add as hyperparam
-            m_tau = 0.03   #TODO: Add as hyperparam
-            m_reward = m_alpha*np.clip(m_tau*agent.get_log_prob(states_v, actions_v), -1, 0)
+            m_alpha = 0.9  # TODO: Add as hyperparam
+            m_tau = 0.03  # TODO: Add as hyperparam
+            m_reward = m_alpha * np.clip(m_tau * agent.get_log_prob(states_v, actions_v), -1, 0)
             rewards[not_done_idx] += m_reward
 
     ref_q_v = torch.FloatTensor(rewards).to(device)
